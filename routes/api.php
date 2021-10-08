@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\API\IncidentController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,6 +16,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+
+
+Route::prefix('v1')->group(function () {
+
+    Route::get    ('/incident',        [IncidentController::class, 'index']);
+    Route::get    ('/incident/{id}',   [IncidentController::class, 'show']);
+    Route::post   ('/incident',        [IncidentController::class, 'store']);
+    Route::post   ('/incident/{id}',   [IncidentController::class, 'update']);
+    Route::delete ('/incident/{id}',   [IncidentController::class, 'destroy']);
+
 });
